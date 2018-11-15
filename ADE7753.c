@@ -120,7 +120,9 @@ unsigned int    ADE7753_READ(unsigned char IC_CS,unsigned char addr,unsigned cha
         res <<= 8;
         res += data[i];
     }
-    return (res/3600);
+    return 0;
+    if(addr == IRMS)    return (res/3600);
+    else if(addr == VRMS)    return 0;
 }
 
 void    ADE7753_INIT(void)

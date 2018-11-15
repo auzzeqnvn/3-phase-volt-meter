@@ -49,7 +49,7 @@ unsigned char     data_led;
 unsigned char     data_single_led =0xff;
 unsigned int      data = 0;
 // Declare your global variables here
-unsigned char led_data[] = {0xF9,0x81,0xBA,0xAB,0xC3,0x6B,0x7B,0xA1,0xFB,0xEB};
+//unsigned char led_data[] = {0xF9,0x81,0xBA,0xAB,0xC3,0x6B,0x7B,0xA1,0xFB,0xEB};
 
 void    SCAN_LED(unsigned char num_led,unsigned char    data);
 // Timer1 overflow interrupt service routine
@@ -439,12 +439,15 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 
 // Global enable interrupts
 #asm("sei")
+ADE7753_INIT();
+data = 8888;
 delay_ms(1000);
 //data = 1234;
 //LED_SELECT(SN);
 while (1)
       {
       // Place your code here
+            delay_ms(100);
             READ_SELECT();
       }
 }

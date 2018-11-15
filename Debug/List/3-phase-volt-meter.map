@@ -17,9 +17,16 @@ data                                                                            
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-timer1_ovf_isr                                                                    0x0004B     88
-SCAN_LED                                                                          0x000A3    105
-LED_SELECT                                                                        0x0010C     41
-READ_SELECT                                                                       0x00135     25
-main                                                                              0x0014E     50
-SPI_SENDBYTE                                                                      0x00180     29
+timer1_ovf_isr                                                                    0x00046     88
+SCAN_LED                                                                          0x0009E    105
+LED_SELECT                                                                        0x00107     40
+SELECT_INPUT                                                                      0x0012F     61
+SELECT_INPUT_COMPARE                                                              0x0016C     41
+READ_SELECT                                                                       0x00195     44
+main                                                                              0x001C1     57
+SPI_SENDBYTE                                                                      0x001FA     26
+SPI_7753_SEND                                                                     0x00214     27
+SPI_7753_RECEIVE                                                                  0x0022F     22
+ADE7753_WRITE                                                                     0x00245     62
+ADE7753_READ                                                                      0x00283    111
+ADE7753_INIT                                                                      0x002F2     36
