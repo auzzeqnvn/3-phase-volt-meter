@@ -1,0 +1,25 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+led_cnt                                                                           R5           1
+data_led                                                                          R4           1
+data_single_led                                                                   R7           1
+data                                                                              R8,R9        2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+timer1_ovf_isr                                                                    0x0004B     88
+SCAN_LED                                                                          0x000A3    105
+LED_SELECT                                                                        0x0010C     41
+READ_SELECT                                                                       0x00135     25
+main                                                                              0x0014E     50
+SPI_SENDBYTE                                                                      0x00180     29
