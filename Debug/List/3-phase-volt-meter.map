@@ -9,24 +9,24 @@ Variable                                                                        
 Register Allocation
 Variable                                                                          Register  Size
 ------------------------------------------------------------------------------------------------
-led_cnt                                                                           R5           1
-data_led                                                                          R4           1
-data_single_led                                                                   R7           1
-data                                                                              R8,R9        2
+led_cnt                                                                           R7           1
+data_led                                                                          R6           1
+data_single_led                                                                   R9           1
+data                                                                              R10,R11      2
 
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-timer1_ovf_isr                                                                    0x00046     88
-SCAN_LED                                                                          0x0009E    105
-LED_SELECT                                                                        0x00107     40
-SELECT_INPUT                                                                      0x0012F     61
-SELECT_INPUT_COMPARE                                                              0x0016C     41
-READ_SELECT                                                                       0x00195     44
-main                                                                              0x001C1     57
-SPI_SENDBYTE                                                                      0x001FA     26
-SPI_7753_SEND                                                                     0x00214     27
-SPI_7753_RECEIVE                                                                  0x0022F     22
-ADE7753_WRITE                                                                     0x00245     62
-ADE7753_READ                                                                      0x00283    111
-ADE7753_INIT                                                                      0x002F2     36
+timer1_ovf_isr                                                                    0x00046     89
+SCAN_LED                                                                          0x0009F    105
+LED_SELECT                                                                        0x00108     40
+SELECT_INPUT                                                                      0x00130     61
+SELECT_INPUT_COMPARE                                                              0x0016D     41
+READ_SELECT                                                                       0x00196     37
+main                                                                              0x001BB     64
+SPI_SENDBYTE                                                                      0x001FB     26
+SPI_7753_SEND                                                                     0x00215     27
+SPI_7753_RECEIVE                                                                  0x00230     22
+ADE7753_WRITE                                                                     0x00246     73
+ADE7753_READ                                                                      0x0028F    131
+ADE7753_INIT                                                                      0x00312     12

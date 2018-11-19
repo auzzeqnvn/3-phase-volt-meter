@@ -44,39 +44,49 @@ Data Stack size         : 256
 #define     SELECT_S1   PORTD.2
 #define     SELECT_S2   PORTD.3
 
+// #define     BUZZER      PORTD.0
+
+// #define     BUZZER_ON   BUZZER = 1
+// #define     BUZZER_OFF   BUZZER = 0
+
+//global variables here
 unsigned char     led_cnt = 1;
 unsigned char     data_led;
-unsigned char     data_single_led =0xff;
+unsigned char     data_single_led = 0xff;
 unsigned int      data = 0;
-// Declare your global variables here
-//unsigned char led_data[] = {0xF9,0x81,0xBA,0xAB,0xC3,0x6B,0x7B,0xA1,0xFB,0xEB};
+// unsigned long      data_temp = 0;
+// unsigned int      data_buff[10];
+// unsigned char     buff_cnt = 0;
+// unsigned char     loop_cnt = 0;
 
-void    SCAN_LED(unsigned char num_led,unsigned char    data);
+
+
+void    SCAN_LED(unsigned char num_led,unsigned char    data_in);
+void  READ_SELECT(void);
 // Timer1 overflow interrupt service routine
 interrupt [TIM1_OVF] void timer1_ovf_isr(void)
 {
 // Reinitialize Timer1 value
       TCNT1H=0xE800 >> 8;
       TCNT1L=0xE800 & 0xff;
-
+      
       if(led_cnt == 1)  data_led = data/1000;
       else if(led_cnt == 2)  data_led = data%1000/100;
       else if(led_cnt == 3)  data_led = data%100/10;
       else if(led_cnt == 4)  data_led = data%10;
       else if(led_cnt == 5)   data_led = data_single_led;
 
-      SCAN_LED(led_cnt,data_led);
-      led_cnt++;
+      SCAN_LED(led_cnt++,data_led);
       if(led_cnt > 5)   led_cnt = 1;
 }
 
-void    SCAN_LED(unsigned char num_led,unsigned char    data)
+void    SCAN_LED(unsigned char num_led,unsigned char    data_in)
 {
     unsigned char   byte1,byte2;
     byte1 = 0xFF;
     byte2 = 0;
 
-      switch(data)
+      switch(data_in)
       {
         case    0:
         {
@@ -157,7 +167,7 @@ void    SCAN_LED(unsigned char num_led,unsigned char    data)
         case    5:
         {
               byte2 = 0xBF;
-              byte1 = data;
+              byte1 = data_in;
               break;
         }
     }
@@ -335,7 +345,7 @@ void  READ_SELECT(void)
             LED_SELECT(TN);
             SELECT_INPUT_COMPARE(TN);
       }
-      data = ADE7753_READ(1,VRMS);
+      //SELECT_INPUT_COMPARE(RS);
 }
 
 
@@ -439,15 +449,29 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 
 // Global enable interrupts
 #asm("sei")
-ADE7753_INIT();
 data = 8888;
-delay_ms(1000);
-//data = 1234;
-//LED_SELECT(SN);
-while (1)
+//delay_ms(1000);
+ADE7753_INIT();
+delay_ms(4000);
+// BUZZER_ON;
+// delay_ms(100);
+// BUZZER_OFF;
+      while (1)
       {
       // Place your code here
-            delay_ms(100);
+            // data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            // if(buff_cnt >= 10)      
+            // {
+            //       buff_cnt = 0;
+            // }
+            // data_temp = 0;
+            // for(loop_cnt = 0;loop_cnt<10;loop_cnt++)
+            // {
+            //       data_temp += data_buff[loop_cnt];
+            // }
+            //data = (unsigned int)data_temp/10;
             READ_SELECT();
+            data = ADE7753_READ(1,VRMS);//VPEAK VRMS
+            delay_ms(100);
       }
 }
