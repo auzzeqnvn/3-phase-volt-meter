@@ -126,8 +126,8 @@ unsigned int    ADE7753_READ(unsigned char IC_CS,unsigned char addr,unsigned cha
         res <<= 8;
         res += data[i];
     }
-    //return  (res/500);
-    return data[0]+data[1] + data[2];
+    return  (res/480);
+    //return data[0]+data[1] + data[2];
 }
 
 void    ADE7753_INIT(void)

@@ -44,20 +44,20 @@ Data Stack size         : 256
 #define     SELECT_S1   PORTD.2
 #define     SELECT_S2   PORTD.3
 
-// #define     BUZZER      PORTD.0
+#define     BUZZER      PORTD.0
 
-// #define     BUZZER_ON   BUZZER = 1
-// #define     BUZZER_OFF   BUZZER = 0
+#define     BUZZER_ON   BUZZER = 1
+#define     BUZZER_OFF   BUZZER = 0
 
 //global variables here
 unsigned char     led_cnt = 1;
 unsigned char     data_led;
 unsigned char     data_single_led = 0xff;
 unsigned int      data = 0;
-// unsigned long      data_temp = 0;
-// unsigned int      data_buff[10];
-// unsigned char     buff_cnt = 0;
-// unsigned char     loop_cnt = 0;
+unsigned long      data_temp = 0;
+unsigned int      data_buff[10];
+unsigned char     buff_cnt = 0;
+unsigned char     loop_cnt = 0;
 
 
 
@@ -319,33 +319,100 @@ void  READ_SELECT(void)
       {
             LED_SELECT(RS);
             SELECT_INPUT_COMPARE(RS);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20;
       }
       else if(!ST_INPUT)
       {
             LED_SELECT(ST);
             SELECT_INPUT_COMPARE(ST);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20;
       }
       else if(!TR_INPUT)
       {
             LED_SELECT(TR);
             SELECT_INPUT_COMPARE(TR);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20;
       }
       else if(!RN_INPUT)
       {
             LED_SELECT(RN);
             SELECT_INPUT_COMPARE(RN);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20*0.95;
       }
       else if(!SN_INPUT)
       {
             LED_SELECT(SN);
             SELECT_INPUT_COMPARE(SN);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20*0.95;
       }
       else if(!TN_INPUT)
       {
             LED_SELECT(TN);
             SELECT_INPUT_COMPARE(TN);
+            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+            if(buff_cnt >= 20)      
+            {
+                  buff_cnt = 0;
+            }
+            data_temp = 0;
+            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
+            {
+                  data_temp += data_buff[loop_cnt];
+            }
+            data = (unsigned int)data_temp/20;
       }
-      //SELECT_INPUT_COMPARE(RS);
+      
+      delay_ms(200);
 }
 
 
@@ -451,27 +518,14 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 #asm("sei")
 data = 8888;
 //delay_ms(1000);
-ADE7753_INIT();
+//ADE7753_INIT();
 delay_ms(4000);
-// BUZZER_ON;
-// delay_ms(100);
-// BUZZER_OFF;
+BUZZER_ON;
+delay_ms(100);
+BUZZER_OFF;
       while (1)
       {
       // Place your code here
-            // data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            // if(buff_cnt >= 10)      
-            // {
-            //       buff_cnt = 0;
-            // }
-            // data_temp = 0;
-            // for(loop_cnt = 0;loop_cnt<10;loop_cnt++)
-            // {
-            //       data_temp += data_buff[loop_cnt];
-            // }
-            //data = (unsigned int)data_temp/10;
             READ_SELECT();
-            data = ADE7753_READ(1,VRMS);//VPEAK VRMS
-            delay_ms(100);
       }
 }

@@ -1,6 +1,8 @@
 RAM Allocation [bytes]
 Variable                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
+data_temp                                                                         0x0160       4
+data_buff                                                                         0x0164      20
 
 EEPROM Allocation [bytes]
 Variable                                                                          Address   Size
@@ -13,20 +15,19 @@ led_cnt                                                                         
 data_led                                                                          R6           1
 data_single_led                                                                   R9           1
 data                                                                              R10,R11      2
+buff_cnt                                                                          R8           1
+loop_cnt                                                                          R13          1
 
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-timer1_ovf_isr                                                                    0x00046     89
-SCAN_LED                                                                          0x0009F    105
-LED_SELECT                                                                        0x00108     40
-SELECT_INPUT                                                                      0x00130     61
-SELECT_INPUT_COMPARE                                                              0x0016D     41
-READ_SELECT                                                                       0x00196     37
-main                                                                              0x001BB     64
-SPI_SENDBYTE                                                                      0x001FB     26
-SPI_7753_SEND                                                                     0x00215     27
-SPI_7753_RECEIVE                                                                  0x00230     22
-ADE7753_WRITE                                                                     0x00246     73
-ADE7753_READ                                                                      0x0028F    131
-ADE7753_INIT                                                                      0x00312     12
+timer1_ovf_isr                                                                    0x00047     89
+SCAN_LED                                                                          0x000A0    105
+LED_SELECT                                                                        0x00109     40
+SELECT_INPUT                                                                      0x00131     61
+SELECT_INPUT_COMPARE                                                              0x0016E     41
+READ_SELECT                                                                       0x00197    493
+main                                                                              0x00384     58
+SPI_SENDBYTE                                                                      0x003BE     28
+SPI_7753_SEND                                                                     0x003DA     27
+SPI_7753_RECEIVE                                                                  0x003F5     22
