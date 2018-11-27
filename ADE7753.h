@@ -24,6 +24,17 @@
 #define PHASE_3_ON  DOUT_CS_SPI_7753_3_MCU = 1
 #define PHASE_3_OFF DOUT_CS_SPI_7753_3_MCU = 0
 
+
+#define EM_MODE_ADDR (0x09)
+#define DISHPF (0)
+#define DISSAG (3)
+#define TEMPSEL (5)
+#define SWRST (6)
+#define DTRT0 (11)
+#define DTRT1 (12)
+#define WAVSEL0 (13)
+#define WAVSEL1 (14)
+
 //Dia chi cac thanh ghi SPI_ADE7753
 #define WAVEFORM        0x01,3    
 #define AENERGY         0x02,3
@@ -72,5 +83,5 @@
 void    SPI_7753_SEND(unsigned char data);
 unsigned char    SPI_7753_RECEIVE(void);
 void    ADE7753_WRITE(unsigned char IC_CS,unsigned char addr,unsigned char num_data,unsigned char data_1,unsigned char data_2,unsigned char data_3);
-unsigned int    ADE7753_READ(unsigned char IC_CS,unsigned char addr,unsigned char num_data);
+unsigned long int    ADE7753_READ(unsigned char IC_CS,unsigned char addr,unsigned char num_data);
 void    ADE7753_INIT(void);

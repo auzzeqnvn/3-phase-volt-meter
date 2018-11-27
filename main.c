@@ -55,9 +55,10 @@ unsigned char     data_led;
 unsigned char     data_single_led = 0xff;
 unsigned int      data = 0;
 unsigned long      data_temp = 0;
-unsigned int      data_buff[10];
+unsigned long int      data_buff[40];
 unsigned char     buff_cnt = 0;
 unsigned char     loop_cnt = 0;
+unsigned char     loop_read_cnt = 0;
 
 
 
@@ -315,104 +316,288 @@ void  SELECT_INPUT_COMPARE(unsigned char  input)
 
 void  READ_SELECT(void)
 {
+     unsigned long int Uint_data_temp[40];
+     unsigned char Uc_temp_cnt;
+     unsigned int Uint_temp;
       if(!RS_INPUT)
       {
             LED_SELECT(RS);
             SELECT_INPUT_COMPARE(RS);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+            if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  // data = ADE7753_READ(1,VRMS)/253;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  //data = (unsigned int)data_temp/6;
+                  data = (unsigned int)(data_temp/261)/14;  
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20;
       }
       else if(!ST_INPUT)
       {
             LED_SELECT(ST);
             SELECT_INPUT_COMPARE(ST);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+            if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  // data = ADE7753_READ(1,VRMS)/253;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  //data = (unsigned int)data_temp/6;
+                  data = (unsigned int)(data_temp/261)/14;   
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20;
       }
       else if(!TR_INPUT)
       {
             LED_SELECT(TR);
             SELECT_INPUT_COMPARE(TR);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+            if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  // data = ADE7753_READ(1,VRMS)/253;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  //data = (unsigned int)data_temp/6;
+                  data = (unsigned int)(data_temp/261)/14;    
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20;
       }
       else if(!RN_INPUT)
       {
             LED_SELECT(RN);
             SELECT_INPUT_COMPARE(RN);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+           if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  // data = ADE7753_READ(1,VRMS)/253;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  //data = (unsigned int)data_temp/6;
+                  data = (unsigned int)(data_temp/261)/14;
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20*0.95;
+            
       }
       else if(!SN_INPUT)
       {
             LED_SELECT(SN);
             SELECT_INPUT_COMPARE(SN);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+            if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  data = (unsigned int)(data_temp/253)/14;
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20*0.95;
       }
       else if(!TN_INPUT)
       {
             LED_SELECT(TN);
             SELECT_INPUT_COMPARE(TN);
-            data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
-            if(buff_cnt >= 20)      
+            if(loop_read_cnt > 10)
             {
-                  buff_cnt = 0;
+                  // data = ADE7753_READ(1,VRMS)/253;
+                  loop_read_cnt = 0;
+                  data_buff[buff_cnt++] = ADE7753_READ(1,VRMS);
+                  if(buff_cnt >= 40)      
+                  {
+                        buff_cnt = 0;
+                  }
+                  data_temp = 0;
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        Uint_data_temp[loop_cnt] = data_buff[loop_cnt];
+                  }
+                  
+                  for(loop_cnt = 0;loop_cnt<40;loop_cnt++)
+                  {
+                        for(Uc_temp_cnt = loop_cnt;Uc_temp_cnt<40;Uc_temp_cnt++)
+                        {
+                              if(Uint_data_temp[loop_cnt] > Uint_data_temp[Uc_temp_cnt])
+                              {
+                                    Uint_temp = Uint_data_temp[loop_cnt];
+                                    Uint_data_temp[loop_cnt] = Uint_data_temp[Uc_temp_cnt];
+                                    Uint_data_temp[Uc_temp_cnt] = Uint_temp;
+                              }
+                        }
+                  }
+
+                  data_temp = 0;
+                  for(loop_cnt = 13;loop_cnt<27;loop_cnt++)
+                  {
+                        data_temp += data_buff[loop_cnt];
+                  }
+                  //data = (unsigned int)data_temp/6;
+                  data = (unsigned int)(data_temp/236)/14;
             }
-            data_temp = 0;
-            for(loop_cnt = 0;loop_cnt<20;loop_cnt++)
-            {
-                  data_temp += data_buff[loop_cnt];
-            }
-            data = (unsigned int)data_temp/20;
       }
       
-      delay_ms(200);
+      delay_ms(10);
+      loop_read_cnt++;
+
 }
 
 
@@ -421,7 +606,7 @@ void  READ_SELECT(void)
 void main(void)
 {
 // Declare your local variables here
-
+unsigned long int   reg = 0;
 // Input/Output Ports initialization
 // Port B initialization
 // Function: Bit7=In Bit6=In Bit5=Out Bit4=In Bit3=Out Bit2=In Bit1=Out Bit0=In 
@@ -519,7 +704,30 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 data = 8888;
 //delay_ms(1000);
 //ADE7753_INIT();
-delay_ms(4000);
+//delay_ms(4000);
+reg = 0; 
+reg |= (1<<SWRST);
+ADE7753_WRITE(1,MODE,(reg>>8) & 0xFF,reg & 0xFF,0x00);
+delay_ms(500);
+reg = ADE7753_READ(1,MODE);
+// data = (reg >> 8) & 0xFF;
+// data = reg & 0xFF;
+//delay_ms(2000);
+
+reg = ADE7753_READ(1,MODE);
+// reg |= (1<<DISHPF) | (1<<WAVSEL0) | (1<<WAVSEL1) | (1<<DTRT0) | (1<<DTRT1) ;
+reg |= (1<<WAVSEL0) | (1<<WAVSEL1) | (1<<DTRT0) | (1<<DTRT1) ;
+ADE7753_WRITE(1,MODE,(reg>>8) & 0xFF,reg & 0xFF,0x00);
+reg = ADE7753_READ(1,MODE);
+// data = reg;
+// data = (reg >> 8) & 0xFF;
+// data = reg & 0xFF;
+delay_ms(500);
+ADE7753_WRITE(1,SAGLVL,0X2a,0X00,0X00);
+delay_ms(500);
+ADE7753_WRITE(1,SAGCYC,0XFF,0X00,0X00);
+delay_ms(500);
+
 BUZZER_ON;
 delay_ms(100);
 BUZZER_OFF;
