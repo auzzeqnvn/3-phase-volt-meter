@@ -3,6 +3,8 @@ Variable                                                                        
 ------------------------------------------------------------------------------------------------
 data_temp                                                                         0x0160       4
 data_buff                                                                         0x0164     160
+loop_timer                                                                        0x0204       1
+Uc_Last_Select                                                                    0x0205       1
 
 EEPROM Allocation [bytes]
 Variable                                                                          Address   Size
@@ -22,14 +24,29 @@ loop_read_cnt                                                                   
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-timer1_ovf_isr                                                                    0x00047     89
-SCAN_LED                                                                          0x000A0    105
-LED_SELECT                                                                        0x00109     40
-SELECT_INPUT                                                                      0x00131     61
-SELECT_INPUT_COMPARE                                                              0x0016E     41
-READ_SELECT                                                                       0x00197   1434
-main                                                                              0x00731    160
-SPI_SENDBYTE                                                                      0x007D1     26
-SPI_7753_SEND                                                                     0x007EB     27
-SPI_7753_RECEIVE                                                                  0x00806     22
-ADE7753_WRITE                                                                     0x0081C     73
+timer1_ovf_isr                                                                    0x00047     98
+SCAN_LED                                                                          0x000A9    105
+LED_SELECT                                                                        0x00112     56
+SELECT_INPUT                                                                      0x0014A     61
+SELECT_INPUT_COMPARE                                                              0x00187     41
+READ_SELECT                                                                       0x001B0   1524
+main                                                                              0x007A4    160
+SPI_SENDBYTE                                                                      0x00844     26
+SPI_7753_SEND                                                                     0x0085E     27
+SPI_7753_RECEIVE                                                                  0x00879     22
+ADE7753_WRITE                                                                     0x0088F     73
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+timer1_ovf_isr                                                                    0x00047     98
+SCAN_LED                                                                          0x000A9    105
+LED_SELECT                                                                        0x00112     56
+SELECT_INPUT                                                                      0x0014A     61
+SELECT_INPUT_COMPARE                                                              0x00187     41
+READ_SELECT                                                                       0x001B0   1524
+main                                                                              0x007A4    160
+SPI_SENDBYTE                                                                      0x00844     26
+SPI_7753_SEND                                                                     0x0085E     27
+SPI_7753_RECEIVE                                                                  0x00879     22
+ADE7753_WRITE                                                                     0x0088F     73
